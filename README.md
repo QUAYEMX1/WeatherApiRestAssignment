@@ -48,3 +48,26 @@ To get started, clone the repository with the following commands:
 ```bash
 git clone https://github.com/QUAYEMX1/WeatherApiRestAssignment.git
 cd WeatherApiRestAssignment
+
+## API Endpoints
+
+### Get Weather Information
+
+- **Endpoint**: `/api/weather/weatherInfo`
+- **Method**: `GET`
+- **Parameters**:
+  - `pincode` (required): The pincode for which weather information is requested.
+  - `for_date` (required): The date for which the weather information is requested in the format `yyyy-MM-dd`.
+### Example Request
+- GET /api/weather/weatherInfo?pincode=411014&for_date=2024-10-15
+
+## Conclusion
+
+The Weather Information API is a powerful tool for retrieving real-time weather data based on pincode and date. By leveraging external services like OpenWeatherMap and
+implementing efficient caching mechanisms, this API provides users with accurate and timely weather information while minimizing unnecessary API calls. 
+Whether you're building applications that require weather data or simply looking to explore how to integrate external APIs, this project serves as a comprehensive guide. We welcome contributions and feedback to improve the functionality and usability of the API. Thank you for exploring the Weather Information API!
+
+
+
+
+
