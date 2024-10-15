@@ -47,17 +47,16 @@
 
 1. ### Clone the Repository
 To get started, clone the repository with the following commands:
-
 ```bash
 git clone https://github.com/QUAYEMX1/WeatherApiRestAssignment.git
 cd WeatherApiRestAssignment
+```
 
-
-3. **Set Up the Backend**:
+2. **Set Up the Backend**:
    - Open the backend project in IntelliJ IDEA.
    - Configure your application properties for the OpenWeatherMap API key.
 
-4. **Run the Application**:
+3. **Run the Application**:
    - Start the backend server using the command:
      ```bash
      mvn spring-boot:run
