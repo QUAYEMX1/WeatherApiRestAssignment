@@ -43,9 +43,13 @@
 
 ### Clone the Repository
 
+To get started, clone the repository with the following commands:
+
 ```bash
 git clone https://github.com/QUAYEMX1/WeatherApiRestAssignment.git
-cd weather-api
+cd WeatherApiRestAssignment
+
+
 
 
 ## API Endpoints
