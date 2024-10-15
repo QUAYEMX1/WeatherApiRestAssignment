@@ -73,10 +73,8 @@ cd WeatherApiRestAssignment
 
 ### API Usage
 
-To retrieve the current weather information based on a given pincode and date, you can use the following API endpoint:
-
-
-GET http://localhost:8080/api/weather/weatherInfo?pincode={pincode}&for_date={date}
+- To retrieve the current weather information based on a given pincode and date, you can use the following API endpoint:
+   http://localhost:8080/api/weather/weatherInfo?pincode={pincode}&for_date={date}
 
 ## Troubleshooting
 
