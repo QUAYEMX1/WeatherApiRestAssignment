@@ -1,9 +1,11 @@
-# 🌦️Weather Information API
+# 🌦️ Weather Information API
 
 ## Overview
 
-**The Weather Information API**provides users with weather data based on a given pincode and date. It retrieves data from an external weather service (OpenWeatherMap) and caches results in a relational database for improved efficiency. This API allows users to obtain detailed weather information, including temperature, humidity, and wind speed.
-## ✨Features
+**The Weather Information API** provides users with weather data based on a given pincode and date. It retrieves data from an external weather service (OpenWeatherMap) and caches results in a relational database for improved efficiency. This API allows users to obtain detailed weather information, including temperature, humidity, and wind speed.
+
+## ✨ Features
+
 - Retrieve weather information based on pincode and date.
 - Cache weather data to avoid redundant API calls.
 - Use of external geocoding service to convert pincode to latitude and longitude.
@@ -11,13 +13,13 @@
 
 ## Project Structure
 
-### 🛠️Backend
+### 🛠️ Backend
 
 - **Framework**: Spring Boot
 - **Language**: Java
 - **Development Environment**: IntelliJ IDEA
 
-  ## Technologies Used
+## Technologies Used
 
 - **Java**: The programming language used for developing the API.
 - **Spring Boot**: A framework that simplifies the development of Java applications and provides a robust environment for building RESTful services.
@@ -36,38 +38,12 @@
 - Maven
 - MySQL Database
 - **An OpenWeatherMap API key** (sign up at [OpenWeatherMap](https://openweathermap.org/api) to get an API key).
-- i have Provided  my API Key in Application.Properties, you can use the same to run the Application 
- src/main/resources/application.properties.
-  - **Application.Properties=:**
-  openweathermap.api.key=YOU WILL GET MY API KEY HERE
 
-### Clone the Repository
+  - I have provided my API key in the `application.properties` file. You can use the same to run the application.
 
-To get started, clone the repository with the following commands:
-
-```bash
+  **Application.properties:**
+  ```properties
+  openweathermap.api.key=YOUR_API_KEY_HERE
+  
 git clone https://github.com/QUAYEMX1/WeatherApiRestAssignment.git
 cd WeatherApiRestAssignment
-
-## API Endpoints
-
-### Get Weather Information
-
-- **Endpoint**: `/api/weather/weatherInfo`
-- **Method**: `GET`
-- **Parameters**:
-  - `pincode` (required): The pincode for which weather information is requested.
-  - `for_date` (required): The date for which the weather information is requested in the format `yyyy-MM-dd`.
-### Example Request
-- GET /api/weather/weatherInfo?pincode=411014&for_date=2024-10-15
-
-## Conclusion
-
-The Weather Information API is a powerful tool for retrieving real-time weather data based on pincode and date. By leveraging external services like OpenWeatherMap and
-implementing efficient caching mechanisms, this API provides users with accurate and timely weather information while minimizing unnecessary API calls. 
-Whether you're building applications that require weather data or simply looking to explore how to integrate external APIs, this project serves as a comprehensive guide. We welcome contributions and feedback to improve the functionality and usability of the API. Thank you for exploring the Weather Information API!
-
-
-
-
-
