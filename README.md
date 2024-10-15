@@ -48,17 +48,3 @@ To get started, clone the repository with the following commands:
 ```bash
 git clone https://github.com/QUAYEMX1/WeatherApiRestAssignment.git
 cd WeatherApiRestAssignment
-
-
-
-
-## API Endpoints
-
-### Get Weather Information
-
-- **Endpoint**: `/api/weather/weatherInfo`
-- **Method**: `GET`
-- **Parameters**:
-  - `pincode` (required): The pincode for which weather information is requested.
-  - `for_date` (required): The date for which the weather information is requested in the format `yyyy-MM-dd`.
-
