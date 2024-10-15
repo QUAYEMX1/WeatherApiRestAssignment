@@ -71,7 +71,7 @@ cd WeatherApiRestAssignment
   - `for_date` (required): The date for which the weather information is requested in the format `yyyy-MM-dd`.
 
 ### Example Request
-  GET /api/weather/weatherInfo?pincode=411014&for_date=2024-10-15
+  [GET /api/weather/weatherInfo?pincode=411014&for_date=2024-10-15](http://localhost:8080/api/weather/weatherInfo?pincode=411014&for_date=2024-10-15)
 ### Example Response
 ```json
 {
