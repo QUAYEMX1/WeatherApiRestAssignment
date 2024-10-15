@@ -70,6 +70,21 @@ cd WeatherApiRestAssignment
   - `pincode` (required): The pincode for which weather information is requested.
   - `for_date` (required): The date for which the weather information is requested in the format `yyyy-MM-dd`.
 
+### Example Request
+  GET /api/weather/weatherInfo?pincode=411014&for_date=2024-10-15
+### Example Response
+```json
+{
+    "pincode": "411014",
+    "weatherDetails": {
+        "weatherDescription": "Clear sky",
+        "temperature": 298.15,
+        "humidity": 70,
+        "windSpeed": 3.5
+    },
+    "date": "2024-10-15"
+}
+
 
 ### API Usage
 
