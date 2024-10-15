@@ -84,7 +84,7 @@ cd WeatherApiRestAssignment
     },
     "date": "2024-10-15"
 }
-
+```
 
 ### API Usage
 
