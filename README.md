@@ -46,9 +46,9 @@
 ### Installation
 
 1. **Clone the Repository**:
-   git clone https://github.com/QUAYEMX1/WeatherApiRestAssignment.git
-   
-   cd WeatherApiRestAssignment
+   ```bash
+git clone https://github.com/QUAYEMX1/WeatherApiRestAssignment.git
+cd WeatherApiRestAssignment
 
 3. **Set Up the Backend**:
    - Open the backend project in IntelliJ IDEA.
