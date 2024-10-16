@@ -1,7 +1,7 @@
 package com.example.weather_api.Service;
 
 import com.example.weather_api.Models.Location;
-import com.example.weather_api.Models.weatherInfo;
+import com.example.weather_api.Models.WeatherInfo;
 import com.example.weather_api.Repository.LocationRepository;
 import com.example.weather_api.Repository.WeatherApiRepository;
 import com.example.weather_api.dto.WeatherDetails;
@@ -9,11 +9,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,44 +31,60 @@ public class WeatherApiService {
     private final String geoUrl = "https://api.openweathermap.org/geo/1.0/zip?zip=";
     private final String weatherUrl = "https://api.openweathermap.org/data/2.5/weather?lat=";
 
-    public weatherInfo getWeatherInfo(String pincode, LocalDate forDate) throws Exception{
-        // Step 1: Check if weather data for the pincode and date is already in the database
-        Optional<weatherInfo> optionalWeatherInfo=weatherApiRepository.findByPincodeAndDate(pincode, forDate);
-        if(optionalWeatherInfo.isPresent()){
-            return optionalWeatherInfo.get();
-        }
+    public WeatherInfo getWeatherInfo(String pincode, LocalDate forDate) throws Exception {
 
-        // Step 2: Check if lat/lon data for the pincode exists in the database
-        Location pincodeLocation=null;
-        Optional<Location>optionalLocation=locationRepository.findByPincode(pincode);
-        if(optionalLocation.isPresent()){
-            pincodeLocation=optionalLocation.get();
-        }else{
+        // Step 1: Check if lat/lon data for the pincode exists in the database
+        Location location = null;
+        Optional<Location> optionalLocation = locationRepository.findByPincode(pincode);
+        if (optionalLocation.isPresent()) {
+               location = optionalLocation.get();
+        } else {
             // Fetch lat/lon from Geocoding API
-            JsonNode pin=getLatLonFromPincode(pincode);
-            double lat = pin.get("lat").asDouble();
-            double lon = pin.get("lon").asDouble();
+                JsonNode pin = getLatLonFromPincode(pincode);
 
-            // Save new pincode-location mapping in the database
-            pincodeLocation=new Location();
-            pincodeLocation.setPincode(pincode);
-            pincodeLocation.setLatitude(lat);
-            pincodeLocation.setLongitude(lon);
+            // Check if "lat" and "lon" are present in the response
+            if (pin.has("lat") && pin.has("lon")) {
+                double lat = pin.get("lat").asDouble();
+                double lon = pin.get("lon").asDouble();
 
-            locationRepository.save(pincodeLocation);
+                // Save new pincode-location mapping in the database
+                location = new Location();
+                location.setPincode(pincode);
+                location.setLatitude(lat);
+                location.setLongitude(lon);
+
+                locationRepository.save(location);
+            } else {
+                // Handle the case where lat/lon data is not found
+                throw new Exception("Geocoding API did not return valid lat/lon data for pincode: " + pincode);
+            }
         }
 
-        WeatherDetails weatherDesc=RetrieveWeatherData(pincodeLocation.getLatitude(),pincodeLocation.getLongitude());
+        // Step 2: Check if weather data for the pincode and date is already in the database
+        List<WeatherInfo> weatherInfoList = location.getWeatherInfoList();
+        for (WeatherInfo weatherInfo1 : weatherInfoList) {
+            if (weatherInfo1.getDate().isEqual(forDate)) {
+                return weatherInfo1;
+            }
+        }
 
-        weatherInfo obj=new weatherInfo();
-        obj.setPincode(pincode);
+        WeatherDetails weatherDesc = RetrieveWeatherData(location.getLatitude(), location.getLongitude());
+
+        WeatherInfo obj = new WeatherInfo();
         obj.setDate(forDate);
         obj.setWeatherDetails(weatherDesc);
+        obj.setLocation(location);
 
+        // Set the bi-directional relationship
+        location.getWeatherInfoList().add(obj);
+
+        // Save both WeatherInfo and Location entities
         weatherApiRepository.save(obj);
+        locationRepository.save(location);
 
         return obj; // Return the weather information object
     }
+
 
     private WeatherDetails RetrieveWeatherData(double latitude, double longitude)throws Exception {
         String baseUrl=weatherUrl + latitude +"&lon="+ longitude+"&appid="+openWeatherApiKey;

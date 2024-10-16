@@ -1,10 +1,11 @@
 package com.example.weather_api.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Table
 @Entity
@@ -16,7 +17,12 @@ import lombok.experimental.FieldDefaults;
 public class Location {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int locationId;
     String pincode;
     double latitude;
     double longitude;
+
+    @OneToMany(mappedBy = "location",cascade = CascadeType.ALL)
+    List<WeatherInfo>weatherInfoList=new ArrayList<>();
 }

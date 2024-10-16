@@ -1,6 +1,6 @@
 package com.example.weather_api.Controller;
 
-import com.example.weather_api.Models.weatherInfo;
+import com.example.weather_api.Models.WeatherInfo;
 import com.example.weather_api.Service.WeatherApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,9 +21,9 @@ public class WeatherApiController {
     WeatherApiService weatherApiService;
 
     @GetMapping("/weatherInfo")
-    public ResponseEntity<weatherInfo> retrieveWeatherInfo(@RequestParam("pincode")String pincode,
+    public ResponseEntity<WeatherInfo> retrieveWeatherInfo(@RequestParam("pincode")String pincode,
                                                            @RequestParam("for_date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate forDate) throws Exception{
-        weatherInfo response=weatherApiService.getWeatherInfo(pincode,forDate);
+        WeatherInfo response=weatherApiService.getWeatherInfo(pincode,forDate);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

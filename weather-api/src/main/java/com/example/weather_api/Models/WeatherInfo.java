@@ -1,6 +1,7 @@
 package com.example.weather_api.Models;
 
 import com.example.weather_api.dto.WeatherDetails;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -14,10 +15,11 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class weatherInfo {
+public class WeatherInfo {
 
     @Id
-    String pincode;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int weatherId;
 
     @Embedded // Use @Embedded to save complex objects
     WeatherDetails weatherDetails;
@@ -25,4 +27,8 @@ public class weatherInfo {
     @Column(name = "weather_date")
     LocalDate date;
 
+    @ManyToOne
+    @JoinColumn
+    @JsonIgnore
+    Location location;
 }
