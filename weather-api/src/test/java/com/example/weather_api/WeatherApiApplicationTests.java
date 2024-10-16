@@ -99,7 +99,7 @@ class WeatherApiApplicationTests {
 		expectedWeatherInfo.setLocation(new Location(0, pincode, 18.5204, 73.8567, new ArrayList<>()));
 
 		// Then
-		Assertions.assertEquals(expectedWeatherInfo.getWeatherDetails(), result.getWeatherDetails());
+	     Assertions.assertEquals(expectedWeatherInfo.getWeatherDetails(), result.getWeatherDetails());
 		Assertions.assertEquals(expectedWeatherInfo.getDate(), result.getDate());
 		Assertions.assertEquals(expectedWeatherInfo.getLocation().getPincode(), result.getLocation().getPincode());
 	}
